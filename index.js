@@ -85,7 +85,7 @@ app.post('/wallet/pay', async (req, res) => {
         if (!userId || !orderId) return res.status(400).json({ error: 'userId and orderId are required' });
 
         const ORDER_URL = process.env.ORDER_SERVICE_URL || 'http://order-service:3002';
-        const INVOICE_URL = process.env.INVOICE_SERVICE_URL || 'http://invoice-service:3005';
+        const INVOICE_URL = process.env.INVOICE_SERVICE_URL || 'http://invoice-service:3004';
 
         const orderRes = await fetch(`${ORDER_URL}/orders/${orderId}`);
         if (!orderRes.ok) return res.status(404).json({ error: 'Order not found' });
