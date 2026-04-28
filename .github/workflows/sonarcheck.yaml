@@ -5,12 +5,16 @@ on:
     branches: [ "main" ]
     types: [opened, synchronize, reopened]
 
+concurrency:
+  group: ${{ github.repository }}-${{ github.workflow }}-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
 jobs:
   sonarcheck:
     permissions:
       contents: read
       security-events: write
-    uses: Vaultrix-in/Vaultrix-CI/.github/workflows/sonarcheck.yaml@feat/ci-workflows
+    uses: Vaultrix-in/Vaultrix-CI/.github/workflows/sonarcheck.yaml@main
     with:
       image_name: wallet-service
     secrets:
